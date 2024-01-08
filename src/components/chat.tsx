@@ -120,7 +120,7 @@ export function CardsChat() {
 
   return (
     <>
-      <Card className="h-full flex flex-col">
+      <Card className="h-full flex-col hidden lg:block">
         <CardHeader className="flex flex-row items-center">
           <div className="flex items-center space-x-4">
             <Avatar>

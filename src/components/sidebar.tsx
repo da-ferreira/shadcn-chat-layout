@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -5,12 +7,16 @@ import { Menu } from '../components/menu';
 import { Contact } from '../data/contacts';
 import { Input } from './ui/input';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import React from 'react';
+import { useRouter } from 'next/navigation';
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   contacts: Contact[];
 }
 
 export function Sidebar({ className, contacts }: SidebarProps) {
+  const router = useRouter()
+
   return (
     <div className={cn(className, 'h-full')}>
       <Menu />
@@ -27,6 +33,7 @@ export function Sidebar({ className, contacts }: SidebarProps) {
                 key={`${contact}-${i}`}
                 variant="ghost"
                 className="w-full justify-start font-normal flex flex-row items-center h-14 border-b border-gray-200 rounded-none"
+                onClick={() => router.push(`/chats/${contact.id}`)}
               >
                 <div className="flex items-center space-x-4 w-full">
                   <Avatar>
@@ -36,7 +43,7 @@ export function Sidebar({ className, contacts }: SidebarProps) {
                   <div className="w-full text-start ">
                     <p className="text-sm font-medium">{contact.name}</p>
 
-                    <p className="text-sm text-muted-foreground overflow-hidden line-clamp-1">
+                    <p className="text-sm text-muted-foreground clamp-text">
                       {contact.lastMessage}
                     </p>
                   </div>
